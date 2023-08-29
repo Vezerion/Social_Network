@@ -2,7 +2,7 @@ import './css/main.min.css';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Profile from './components/Profile'
-import Posts from './components/Posts'
+import Messages from './components/Messages';
 function App() {
   return (
     <div className="wrapper">
@@ -11,8 +11,12 @@ function App() {
       <div className='container'>
         <div className='container-fluid'>
           <Navigation />
+          
+          <div className='content'>
           <Profile />
-          <Posts />
+          {/* <Messages /> */}
+          </div>
+          
         </div>
 
       </div>

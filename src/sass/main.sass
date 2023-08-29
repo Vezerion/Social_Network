@@ -12,23 +12,24 @@ body
 .container
     width: 1140px
     margin: 0 auto
-    grid-area: c
-    display: flex
+    grid-area: main-content
 .container-fluid
     width: 100%
     height: 100%
     display: grid
-    grid-template-areas: "n p" "pos pos"
+    grid-template-areas: "navigation content"
     grid-template-columns: 230px auto
-    grid-template-rows: 360px auto
+    grid-template-rows: auto
 footer
-    grid-area: f
+    grid-area: footer
+.content
+    grid-area: content
 .wrapper
     height: 100%
     display: grid
-    grid-template-areas: "h h h" "c c c" "c c c" "f f f"
+    grid-template-areas: "header header header" "main-content main-content main-content" "footer footer footer"
     grid-template-columns: 1fr 3fr 1fr
-    grid-template-rows: 60px 350px auto 60px
+    grid-template-rows: 60px auto 60px
 @import '_header.sass'
 @import '_navigation.sass'
 @import '_profile.sass'
