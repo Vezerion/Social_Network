@@ -1,0 +1,29 @@
+.navigation
+    margin-top: 40px
+    display: flex
+    flex-direction: column
+    width: 230px
+    height: 320px
+    justify-content: space-between
+    grid-area: n
+    &_item
+        height: 40px
+        border-radius: 10px
+        padding-left: 10px
+        cursor: pointer
+        display: flex
+        align-items: center
+        &_name
+            color: #505050
+            height: 100%
+            margin-left: 10px
+            font-size: 20px
+            line-height: 40px
+        &_icon
+            color: #505050
+            font-size: 20px
+        &:hover
+            background-color: #fff
+.navigation_item:hover
+    .navigation_item_name, .navigation_item_icon
+        color: #000          

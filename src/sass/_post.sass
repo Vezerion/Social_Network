@@ -1,0 +1,37 @@
+.post
+    width: 500px
+    background-color: #fff
+    border-radius: 15px
+    padding: 10px
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2)
+    display: grid
+    grid-template-areas: 'logo title date' 'text text text' 'photo photo photo'
+    grid-template-columns: 1fr 1fr 1fr
+    grid-template-rows: 30px auto auto
+    grid-gap: 5px
+    margin-bottom: 35px
+    &_text
+        grid-area: text
+    &_title
+        grid-area: title
+        justify-self: center
+    &_date
+        grid-area: date
+        justify-self: flex-end
+    &_photo
+        &_wrapper
+            width: 30px
+            height: 30px
+            grid-area: logo
+        &_img
+            width: 100%
+            height: 100%
+    &_picture
+        justify-self: center
+        max-height: 480px
+        max-width: 480px
+        grid-area: photo
+        &_img
+            object-fit: contain
+            width: 100%
+            height: 100%
