@@ -1,6 +1,6 @@
 function Messages() {
     return (
-        <div> Dialogs </div>
+        <div className="messages"> Messages </div>
     )
 }
 
