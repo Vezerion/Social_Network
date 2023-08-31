@@ -5,16 +5,16 @@ function Messages() {
     return (
         <div className="messages">
             <div className="messages_chats">
-                <ChatPartner name="Lorem Ipsum" avatar={avatar} />
-                <ChatPartner name="Myles Mullins" avatar={avatar} />
-                <ChatPartner name="Jasper Hatfield" avatar={avatar} />
-                <ChatPartner name="Poppy Morton" avatar={avatar} />
-                <ChatPartner name="Ivy Harrison" avatar={avatar} />
-                <ChatPartner name="Mahdi Keller" avatar={avatar} />
-                <ChatPartner name="Riley Alvarado" avatar={avatar} />
-                <ChatPartner name="Omari May" avatar={avatar} />
-                <ChatPartner name="Wojciech Acevedo" avatar={avatar} />
-                <ChatPartner name="Maisey Summers" avatar={avatar} />
+                <ChatPartner id="0" name="Lorem Ipsum" avatar={avatar} />
+                <ChatPartner id="1" name="Myles Mullins" avatar={avatar} />
+                <ChatPartner id="2" name="Jasper Hatfield" avatar={avatar} />
+                <ChatPartner id="3" name="Poppy Morton" avatar={avatar} />
+                <ChatPartner id="4" name="Ivy Harrison" avatar={avatar} />
+                <ChatPartner id="5" name="Mahdi Keller" avatar={avatar} />
+                <ChatPartner id="6" name="Riley Alvarado" avatar={avatar} />
+                <ChatPartner id="7" name="Omari May" avatar={avatar} />
+                <ChatPartner id="8" name="Wojciech Acevedo" avatar={avatar} />
+                <ChatPartner id="9" name="Maisey Summers" avatar={avatar} />
                 
             </div>
             <div className="messages_chat">
