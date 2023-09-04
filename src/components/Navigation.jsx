@@ -10,7 +10,7 @@ function Navigation() {
         <nav className="navigation">
             <div className="navigation_item navigation_profile">
                 <FontAwesomeIcon className ='navigation_item_icon' icon={faUser} />
-                <NavLink to="/profile"className='navigation_item_name'>Profile</NavLink>
+                <NavLink to="/profile" className='navigation_item_name'>Profile</NavLink>
             </div>
             <div className="navigation_item navigation_messages">
                 <FontAwesomeIcon className ='navigation_item_icon' icon={faMessage} />

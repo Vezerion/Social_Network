@@ -7,7 +7,7 @@ import News from './components/News';
 import Music from './components/Music';
 import Settings from './components/Settings';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
@@ -19,8 +19,8 @@ function App() {
             <div className='content'>
               <Routes>
                 <Route path='/' element={<Profile/>}/>
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/messages/*" element={<Messages />} />
+                <Route path="/profile" element={<Profile posts={props.posts}/>} />
+                <Route path="/messages/*" element={<Messages partners={props.partners} messages={props.messages}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
