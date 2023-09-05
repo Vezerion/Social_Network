@@ -10,7 +10,7 @@ function Messages(props) {
         <div className="messages">
             <div className="messages_chats">
                 {
-                    props.partners.map((item)=>{ 
+                    props.messagesPage.partners.map((item)=>{ 
                         return <ChatPartner key={item.id} id={`${item.id}`} name={item.name} avatar={item.avatar} />
                     })
                 }
@@ -19,7 +19,7 @@ function Messages(props) {
             <div className="messages_chat">
                 <div className="messages_chat_wrapper">
                     {
-                        props.messages.map((item)=>{
+                        props.messagesPage.messages.map((item)=>{
                             return <Message key={item.id} author={item.author} text={item.text} />
                         })
                     }

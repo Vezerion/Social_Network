@@ -18,9 +18,9 @@ function App(props) {
             <Navigation />
             <div className='content'>
               <Routes>
-                <Route path='/' element={<Profile/>}/>
-                <Route path="/profile" element={<Profile posts={props.posts}/>} />
-                <Route path="/messages/*" element={<Messages partners={props.partners} messages={props.messages}/>} />
+                <Route path='/' element={<Profile profilePage = {props.state.profilePage}/>}/>
+                <Route path="/profile" element={<Profile profilePage = {props.state.profilePage}/>} />
+                <Route path="/messages/*" element={<Messages messagesPage = {props.state.messagesPage}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
