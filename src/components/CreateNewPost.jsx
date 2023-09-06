@@ -7,8 +7,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { createRef } from 'react';
 function CreateNewPost(props) {
     const message = createRef();
-    const alertMessage = () => {
-        alert(message.current.value);
+    const addPost = () => {
+        props.addPost();
+        props.close();
+    }
+    const onPostChange = () => {
+        props.updateNewPostText(message.current.value);
     }
     return (
         <div className='modal'>
@@ -21,9 +25,9 @@ function CreateNewPost(props) {
                 </button>
                 <div className="modal_content">
                     <div className="modal_content_username">Lorem ipsum</div>
-                    <textarea placeholder='write here' ref={message} name="" id="" cols="30" rows="10" className="modal_content_textarea"></textarea>
+                    <textarea placeholder='write here' ref={message} name="" id="" cols="30" rows="10" className="modal_content_textarea" value={props.newPostText} onChange={onPostChange}/>
                     <div className="modal_content_btns">
-                        <button onClick={alertMessage} className="modal_content_btns_send modal_content_btns_btn">
+                        <button onClick={addPost} className="modal_content_btns_send modal_content_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </button>
                         <button className="modal_content_btns_clear modal_content_btns_btn">

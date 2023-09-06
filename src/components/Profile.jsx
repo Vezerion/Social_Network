@@ -5,7 +5,7 @@ function Profile(props) {
     return (
         <div className="profile">
             <ProfileInfo name="Lorem  ipsum" avatar={avatar} age="22" description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum, accusantium facere expedita animi ex sed impedit numquam delectus nostrum consequatur temporibus, facilis illo, fugit quidem provident assumenda cupiditate architecto sit."/>
-            <Posts posts={props.profilePage.posts}/>
+            <Posts posts={props.profilePage.posts} newPostText={props.profilePage.newPostText} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>
 
     );

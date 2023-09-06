@@ -10,7 +10,7 @@ function Posts(props) {
         <div className="posts">
             <button onClick={handleClick} className="posts_button">Create New Post</button>
             {isShown && (
-                <CreateNewPost close={handleClick}/>
+                <CreateNewPost show={setIsShown} updateNewPostText={props.updateNewPostText} newPostText={props.newPostText} addPost={props.addPost} close={handleClick}/>
             )}
             <div className="posts_wrapper">
                 {props.posts.map(post=> {

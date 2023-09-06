@@ -1,4 +1,5 @@
 import avatar from '../icons/avatar-placeholder.svg';
+import { rerenderEntireTree } from '../render';
 let state = {
     profilePage: {
         posts: [
@@ -7,7 +8,8 @@ let state = {
             {id: 2, date: '04.09.23', title:'Why?', post: "Ok?" },
             {id: 3, date: '24.09.23', title:'Breaking News', post: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem voluptates tempora repellat, molestiae, maiores, corporis beatae aperiam nesciunt perferendis qui ex magnam. Eius nam eum nostrum at ducimus quae quis facere asperiores cum libero dolorem totam repudiandae sint voluptatem quod laborum vero, eaque corporis hic rerum quidem? Error, consectetur veniam!"},
             {id: 4, date: '04.09.23', title: 'Now all data in index.js', post: 'It`s working, but is it truly the way that i should give the data to my components? i dont think so.'}
-          ]
+          ],
+        newPostText: ''
     },
     messagesPage: {
         partners: [
@@ -36,4 +38,19 @@ let state = {
     }
 };
 
+export const addPost = () => {
+  const newPost = {
+    id: 5,
+    date: '06.09.2023',
+    title: 'stupid function', 
+    post: state.profilePage.newPostText
+  }
+  state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
+  rerenderEntireTree(state);
+}
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
+}
 export default state;
