@@ -1,0 +1,81 @@
+.modal
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    right: 0
+    background-color: #3f3f3f70
+    &_wrapper
+        width: 500px
+        height: 350px
+        background-color: #fff
+        border-radius: 20px
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2)
+        position: absolute
+        padding: 15px
+        top: calc(50% - 175px)
+        right: calc(50% - 390px)
+        z-index: 100
+    &_avatar
+        width: 150px
+        height: 150px
+        position: absolute
+        left: calc( 50% - 75px )
+        top: calc( 0% - 75px )
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2)
+        border: 1px solid #0000002d
+        border-radius: 100%
+        &_img
+            width: 100%
+            height: 100%
+    &_close
+        font-size: 20px
+        font-weight: 300
+        width: 40px
+        height: 40px
+        position: absolute
+        right: 0
+        top: 0
+        border-top-right-radius: 20px
+        border-bottom-left-radius: 20px
+        border: none
+        cursor: pointer
+        color: #1051dd
+        background-color: #e2e2e2
+        &:hover
+            background-color: #50505038
+    &_content
+        margin-top: 70px
+        height: 240px
+        display: flex
+        align-items: center
+        flex-direction: column
+        justify-content: space-between
+        &_username
+            font-size: 22px
+        &_textarea
+            outline: none
+            padding: 15px
+            resize: none
+            height: 150px
+            width: 100%
+            border-radius: 15px
+        &_btns
+            display: flex
+            width: 90%
+            justify-content: space-around
+            &_btn
+                height: 35px
+                width: 100px
+                font-size: 22px
+                cursor: pointer
+                background-color: #e2e2e2
+                border-radius: 15px
+                display: flex
+                align-items: center
+                justify-content: center
+                border: none
+                color: #313131
+                &:hover
+                    background-color: #50505038
+                    color: #1051dd

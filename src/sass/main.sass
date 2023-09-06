@@ -2,11 +2,14 @@
     box-sizing: border-box
     padding: 0px
     margin: 0px
+    scroll-behavior: smooth
 html
     height: 100%
 body
     height: 100%
     background-color: #e2e2e2
+    &:has(.modal)
+        overflow: hidden
 #root
     height: 100%
 .container
@@ -39,3 +42,4 @@ footer
 @import '_messages.sass'
 @import '_chat-partner.sass'
 @import '_message.sass'
+@import '_createNewPost.sass'
