@@ -1,5 +1,5 @@
 import avatar from '../icons/avatar-placeholder.svg';
-import { rerenderEntireTree } from '../render';
+
 let state = {
   profilePage: {
     posts: [
@@ -38,7 +38,9 @@ let state = {
     newMessageText: ''
   }
 };
+let rerenderEntireTree = () => {
 
+}
 export const addPost = () => {
   if (state.profilePage.newPostText !== '') {
     const newPost = {
@@ -55,7 +57,7 @@ export const addPost = () => {
 }
 export const updateNewPostText = (newText) => {
   state.profilePage.newPostText = newText;
-  rerenderEntireTree(state);
+  rerenderEntireTree();
 }
 
 export const addMessage = () => {
@@ -67,16 +69,20 @@ export const addMessage = () => {
     }
     state.messagesPage.messages.push(newMessage);
     state.messagesPage.newMessageText = '';
-    rerenderEntireTree(state);
+    rerenderEntireTree();
   }
 
 }
 export const updateNewMessageText = (newText) => {
   state.messagesPage.newMessageText = newText;
-  rerenderEntireTree(state);
+  rerenderEntireTree();
 }
 export const clearMessageText = () => {
   state.messagesPage.newMessageText = '';
-  rerenderEntireTree(state);
+  rerenderEntireTree();
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
 export default state;
