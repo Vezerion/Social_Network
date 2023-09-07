@@ -8,11 +8,14 @@ import { createRef } from 'react';
 
 function Messages(props) {
     const messageArea = createRef();
-    const alertMessage = () => {
-        alert(messageArea.current.value);
+    const addMessage = () => {
+        props.addMessage();
     };
+    const onMessageChange = () => {
+        props.updateNewMessageText(messageArea.current.value);
+    }
     const clearText = () => {
-        messageArea.current.value = '';
+        props.clearMessageText();
     }
     return (
         <div className="messages">
@@ -33,9 +36,9 @@ function Messages(props) {
                     }
                 </div>
                 <div className="messages_chat_textarea_wrapper">
-                    <textarea ref={messageArea} className="messages_chat_textarea" required name="" id="" cols="30" rows="6"></textarea>
+                    <textarea ref={messageArea} className="messages_chat_textarea" required name="" id="" cols="30" onChange={onMessageChange} value={props.messagesPage.newMessageText} rows="6"/>
                     <div className="messages_chat_btns">
-                        <button onClick={alertMessage} className="messages_chat_btns_send messages_chat_btns_btn">
+                        <button onClick={addMessage} className="messages_chat_btns_send messages_chat_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </button>
                         <button onClick={clearText} className="messages_chat_btns_clear messages_chat_btns_btn">

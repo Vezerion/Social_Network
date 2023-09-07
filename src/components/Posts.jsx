@@ -4,6 +4,10 @@ import CreateNewPost from './CreateNewPost.jsx'
 function Posts(props) {
     const [isShown, setIsShown] = useState(false);
     const handleClick = (e) => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+        });
         setIsShown(current => !current)
     };
     return (

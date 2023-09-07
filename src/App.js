@@ -13,7 +13,6 @@ function App(props) {
     <BrowserRouter>
       <div className="wrapper">
         <Header />
-
         <div className='container'>
           <div className='container-fluid'>
             <Navigation />
@@ -21,7 +20,7 @@ function App(props) {
               <Routes>
                 <Route path='/' element={<Profile profilePage = {props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
                 <Route path="/profile" element={<Profile profilePage = {props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
-                <Route path="/messages/*" element={<Messages messagesPage = {props.state.messagesPage}/>} />
+                <Route path="/messages/*" element={<Messages messagesPage = {props.state.messagesPage} addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} clearMessageText={props.clearMessageText}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
