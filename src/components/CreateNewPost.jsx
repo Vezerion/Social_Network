@@ -8,11 +8,11 @@ import { createRef } from 'react';
 function CreateNewPost(props) {
     const message = createRef();
     const addPost = () => {
-        props.addPost();
+        props.store.addPost();
         props.close();
     }
     const onPostChange = () => {
-        props.updateNewPostText(message.current.value);
+        props.store.updateNewPostText(message.current.value);
     }
     return (
         <div className='modal'>
@@ -25,7 +25,7 @@ function CreateNewPost(props) {
                 </button>
                 <div className="modal_content">
                     <div className="modal_content_username">Lorem ipsum</div>
-                    <textarea placeholder='write here' ref={message} name="" id="" cols="30" rows="10" className="modal_content_textarea" value={props.newPostText} onChange={onPostChange}/>
+                    <textarea placeholder='write here' ref={message} name="" id="" cols="30" rows="10" className="modal_content_textarea" value={props.store.getNewPostText()} onChange={onPostChange}/>
                     <div className="modal_content_btns">
                         <button onClick={addPost} className="modal_content_btns_send modal_content_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />

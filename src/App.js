@@ -18,9 +18,9 @@ function App(props) {
             <Navigation />
             <div className='content'>
               <Routes>
-                <Route path='/' element={<Profile profilePage = {props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
-                <Route path="/profile" element={<Profile profilePage = {props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
-                <Route path="/messages/*" element={<Messages messagesPage = {props.state.messagesPage} addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} clearMessageText={props.clearMessageText}/>} />
+                <Route path='/' element={<Profile store={props.store}/>}/>
+                <Route path="/profile" element={<Profile store={props.store}/>} />
+                <Route path="/messages/*" element={<Messages store={props.store}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />

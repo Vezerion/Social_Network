@@ -9,19 +9,19 @@ import { createRef } from 'react';
 function Messages(props) {
     const messageArea = createRef();
     const addMessage = () => {
-        props.addMessage();
+        props.store.addMessage();
     };
     const onMessageChange = () => {
-        props.updateNewMessageText(messageArea.current.value);
+        props.store.updateNewMessageText(messageArea.current.value);
     }
     const clearText = () => {
-        props.clearMessageText();
+        props.store.clearMessageText();
     }
     return (
         <div className="messages">
             <div className="messages_chats">
                 {
-                    props.messagesPage.partners.map((item) => {
+                    props.store.getPartners().map((item) => {
                         return <ChatPartner key={item.id} id={`${item.id}`} name={item.name} avatar={item.avatar} />
                     })
                 }
@@ -30,13 +30,13 @@ function Messages(props) {
             <div className="messages_chat">
                 <div className="messages_chat_wrapper">
                     {
-                        props.messagesPage.messages.map((item) => {
+                        props.store.getMessages().map((item) => {
                             return <Message key={item.id} author={item.author} text={item.text} />
                         })
                     }
                 </div>
                 <div className="messages_chat_textarea_wrapper">
-                    <textarea ref={messageArea} className="messages_chat_textarea" required name="" id="" cols="30" onChange={onMessageChange} value={props.messagesPage.newMessageText} rows="6"/>
+                    <textarea ref={messageArea} className="messages_chat_textarea" required name="" id="" cols="30" onChange={onMessageChange} value={props.store.getNewMessageText()} rows="6"/>
                     <div className="messages_chat_btns">
                         <button onClick={addMessage} className="messages_chat_btns_send messages_chat_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
