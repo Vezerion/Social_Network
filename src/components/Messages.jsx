@@ -5,14 +5,15 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { createRef } from 'react';
-
+import { addMessageActionCreator } from '../redux/state'
+import { updateNewMessageTextActionCreator } from '../redux/state'
 function Messages(props) {
     const messageArea = createRef();
     const addMessage = () => {
-        props.store.addMessage();
+        props.dispatch(addMessageActionCreator());
     };
     const onMessageChange = () => {
-        props.store.updateNewMessageText(messageArea.current.value);
+        props.dispatch(updateNewMessageTextActionCreator(messageArea.current.value));
     }
     const clearText = () => {
         props.store.clearMessageText();

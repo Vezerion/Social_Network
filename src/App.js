@@ -18,13 +18,13 @@ function App(props) {
             <Navigation />
             <div className='content'>
               <Routes>
-                <Route path='/' element={<Profile store={props.store}/>}/>
-                <Route path="/profile" element={<Profile store={props.store}/>} />
-                <Route path="/messages/*" element={<Messages store={props.store}/>} />
+                <Route path='/' element={<Profile store={props.store} dispatch={props.dispatch}/>}/>
+                <Route path="/profile" element={<Profile store={props.store} dispatch={props.dispatch}/>} />
+                <Route path="/messages/*" element={<Messages store={props.store} dispatch={props.dispatch}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
-              </Routes>
+              </Routes> 
             </div>
 
           </div>

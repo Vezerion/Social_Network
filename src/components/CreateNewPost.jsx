@@ -5,14 +5,16 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { createRef } from 'react';
+import { addPostActionCreator } from '../redux/state'
+import { updateNewPostTextActionCreator } from '../redux/state'
 function CreateNewPost(props) {
     const message = createRef();
     const addPost = () => {
-        props.store.addPost();
+        props.dispatch(addPostActionCreator());
         props.close();
     }
     const onPostChange = () => {
-        props.store.updateNewPostText(message.current.value);
+        props.dispatch(updateNewPostTextActionCreator(message.current.value));
     }
     return (
         <div className='modal'>

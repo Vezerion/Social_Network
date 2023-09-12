@@ -1,19 +1,18 @@
 import avatar from '../icons/avatar-placeholder.svg';
-
 let store = {
   _state: {
-    _profilePage: {
-      _posts: [
+    profilePage: {
+      posts: [
         { id: 0, date: '28.08.23', title: 'Lorem, ipsum.', post: "Hello React!" },
         { id: 1, date: '02.09.23', title: 'React', post: "How does it work?" },
         { id: 2, date: '04.09.23', title: 'Why?', post: "Ok?" },
         { id: 3, date: '24.09.23', title: 'Breaking News', post: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem voluptates tempora repellat, molestiae, maiores, corporis beatae aperiam nesciunt perferendis qui ex magnam. Eius nam eum nostrum at ducimus quae quis facere asperiores cum libero dolorem totam repudiandae sint voluptatem quod laborum vero, eaque corporis hic rerum quidem? Error, consectetur veniam!" },
         { id: 4, date: '04.09.23', title: 'Now all data in index.js', post: 'It`s working, but is it truly the way that i should give the data to my components? i dont think so.' }
       ],
-      _newPostText: ''
+      newPostText: ''
     },
-    _messagesPage: {
-      _partners: [
+    messagesPage: {
+      partners: [
         { id: 0, name: "Lorem Ipsum", avatar: avatar },
         { id: 1, name: "Myles Mullins", avatar: avatar },
         { id: 2, name: "Jasper Hatfield", avatar: avatar },
@@ -25,7 +24,7 @@ let store = {
         { id: 8, name: "Wojciech Acevedo", avatar: avatar },
         { id: 9, name: "Maisey Summers", avatar: avatar },
       ],
-      _messages: [
+      messages: [
         { id: 0, author: "You", text: "Hello!" },
         { id: 1, author: "You", text: "I hope this chat will be working soon" },
         { id: 2, author: "Maisey Summers", text: "Hello!" },
@@ -36,63 +35,63 @@ let store = {
         { id: 7, author: "Maisey Summers", text: "Oh, Sorry" }
   
       ],
-      _newMessageText: ''
+      newMessageText: ''
     }
   },
   getPosts() {
-    return this._state._profilePage._posts;
+    return this._state.profilePage.posts;
     
   },
   getPartners() {
-    return this._state._messagesPage._partners;
+    return this._state.messagesPage.partners;
   },
   getNewPostText() {
-    return this._state._profilePage._newPostText;
+    return this._state.profilePage.newPostText;
   },
   getMessages() {
-    return this._state._messagesPage._messages;
+    return this._state.messagesPage.messages;
   },
   getNewMessageText() {
-    return this._state._messagesPage._newMessageText;
+    return this._state.messagesPage.newMessageText;
   },
   getState() {
     return this._state;
   },
-  addPost() {
-    if (this._state._profilePage._newPostText !== '') {
+  _addPost() {
+    if (this._state.profilePage.newPostText !== '') {
       const newPost = {
         id: 5,
         date: '06.09.2023',
         title: 'stupid function',
-        post: this._state._profilePage._newPostText
+        post: this._state.profilePage.newPostText
       }
-      this._state._profilePage._posts.push(newPost);
-      this._state._profilePage._newPostText = '';
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = '';
       this._rerenderEntireTree();
     }
   },
-  updateNewPostText(newText) {
-    this._state._profilePage._newPostText = newText;
+  _updateNewPostText(newText) {
+    this._state.profilePage.newPostText = newText;
     this._rerenderEntireTree();
   },
-  addMessage() {
-    if (this._state._messagesPage._newMessageText !== '') {
+  _addMessage() {
+    if (this._state.messagesPage.newMessageText !== '') {
       const newMessage = {
         id: 5,
         author: 'You',
-        text: this._state._messagesPage._newMessageText
+        text: this._state.messagesPage.newMessageText
       }
-      this._state._messagesPage._messages.push(newMessage);
-      this._state._messagesPage._newMessageText = '';
+      this._state.messagesPage.messages.push(newMessage);
+      this._state.messagesPage.newMessageText = '';
       this._rerenderEntireTree();
     }
   },
-  updateNewMessageText(newText) {
-    this._state._messagesPage._newMessageText = newText;
+  _updateNewMessageText(newText) {
+    this._state.messagesPage.newMessageText = newText;
     this._rerenderEntireTree();
   },
   clearMessageText() {
-    this._state._messagesPage._newMessageText = '';
+    this._state.messagesPage.newMessageText = '';
     this._rerenderEntireTree();
   },
   subscribe(observer) {
@@ -100,6 +99,51 @@ let store = {
   },
   _rerenderEntireTree() {
 
+  },
+  dispatch(action) {
+    const type = action.type;
+    switch(type) {
+      case 'ADD-POST':
+        this._addPost();
+        break;
+      case 'ADD-MESSAGE':
+        this._addMessage();
+        break;
+      case 'UPDATE-NEW-POST-TEXT':
+        this._updateNewPostText(action.newText);
+        break;
+      case 'UPDATE-NEW-MESSAGE-TEXT':
+        this._updateNewMessageText(action.newText);
+        break;
+        default:
+          console.log("Error");
+    }
+  }
+}
+
+export function addPostActionCreator() {
+  return {
+    type: 'ADD-POST'
+  }
+}
+
+export function addMessageActionCreator() {
+  return {
+    type: 'ADD-MESSAGE'
+  }
+}
+
+export function updateNewPostTextActionCreator(newText) {
+  return {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: newText
+  }
+}
+
+export function updateNewMessageTextActionCreator(newText) {
+  return {
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newText: newText
   }
 }
 export default store;

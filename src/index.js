@@ -1,16 +1,14 @@
 import reportWebVitals from './reportWebVitals'; 
-// import state from './redux/state';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-// import { addMessage, addPost, updateNewPostText, updateNewMessageText, clearMessageText, subscribe} from './redux/state';
 import store from './redux/state';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
-            <App store={store}/>
+            <App store={store} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>
     );
 }

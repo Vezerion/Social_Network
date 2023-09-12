@@ -14,7 +14,7 @@ function Posts(props) {
         <div className="posts">
             <button onClick={handleClick} className="posts_button">Create New Post</button>
             {isShown && (
-                <CreateNewPost show={setIsShown} store={props.store} close={handleClick}/>
+                <CreateNewPost show={setIsShown} store={props.store} dispatch={props.dispatch} close={handleClick}/>
             )
             }
             <div className="posts_wrapper">
