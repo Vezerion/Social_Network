@@ -1,4 +1,6 @@
 import avatar from '../icons/avatar-placeholder.svg';
+import profileReducer from './profile-reducer'
+import messagesReducer from './messages-reducer'
 let store = {
   _state: {
     profilePage: {
@@ -40,12 +42,11 @@ let store = {
   },
   getPosts() {
     return this._state.profilePage.posts;
-    
   },
   getPartners() {
     return this._state.messagesPage.partners;
   },
-  getNewPostText() {
+  _getNewPostText() {
     return this._state.profilePage.newPostText;
   },
   getMessages() {
@@ -101,49 +102,17 @@ let store = {
 
   },
   dispatch(action) {
-    const type = action.type;
-    switch(type) {
-      case 'ADD-POST':
-        this._addPost();
-        break;
-      case 'ADD-MESSAGE':
-        this._addMessage();
-        break;
-      case 'UPDATE-NEW-POST-TEXT':
-        this._updateNewPostText(action.newText);
-        break;
-      case 'UPDATE-NEW-MESSAGE-TEXT':
-        this._updateNewMessageText(action.newText);
-        break;
-        default:
-          console.log("Error");
-    }
+    // debugger;
+    let ret = profileReducer(action, this._state.profilePage);
+    console.log(ret);
+    this._state.profilePage = ret;
+    let mes = messagesReducer(action, this._state.messagesPage);
+    this._state.messagesPage = mes;
+    console.log(mes);
+    this._rerenderEntireTree();
+
   }
 }
 
-export function addPostActionCreator() {
-  return {
-    type: 'ADD-POST'
-  }
-}
 
-export function addMessageActionCreator() {
-  return {
-    type: 'ADD-MESSAGE'
-  }
-}
-
-export function updateNewPostTextActionCreator(newText) {
-  return {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: newText
-  }
-}
-
-export function updateNewMessageTextActionCreator(newText) {
-  return {
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newText: newText
-  }
-}
 export default store;

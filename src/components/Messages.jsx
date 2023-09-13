@@ -5,8 +5,7 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { createRef } from 'react';
-import { addMessageActionCreator } from '../redux/state'
-import { updateNewMessageTextActionCreator } from '../redux/state'
+import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../redux/messages-reducer'
 function Messages(props) {
     const messageArea = createRef();
     const addMessage = () => {

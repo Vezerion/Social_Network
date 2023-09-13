@@ -4,17 +4,15 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { createRef } from 'react';
-import { addPostActionCreator } from '../redux/state'
-import { updateNewPostTextActionCreator } from '../redux/state'
+import { addPostActionCreator, updateNewPostTextActionCreator, getNewPostTextActionCreator } from '../redux/profile-reducer'
 function CreateNewPost(props) {
-    const message = createRef();
+    // debugger;
     const addPost = () => {
         props.dispatch(addPostActionCreator());
         props.close();
     }
-    const onPostChange = () => {
-        props.dispatch(updateNewPostTextActionCreator(message.current.value));
+    const onPostChange = (e) => {
+        props.dispatch(updateNewPostTextActionCreator(e.target.value));
     }
     return (
         <div className='modal'>
@@ -27,7 +25,7 @@ function CreateNewPost(props) {
                 </button>
                 <div className="modal_content">
                     <div className="modal_content_username">Lorem ipsum</div>
-                    <textarea placeholder='write here' ref={message} name="" id="" cols="30" rows="10" className="modal_content_textarea" value={props.store.getNewPostText()} onChange={onPostChange}/>
+                    <textarea placeholder='write here' name="" id="" cols="30" rows="10" className="modal_content_textarea" value={props.dispatch(getNewPostTextActionCreator())} onChange={onPostChange}/>
                     <div className="modal_content_btns">
                         <button onClick={addPost} className="modal_content_btns_send modal_content_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
