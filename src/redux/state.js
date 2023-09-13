@@ -1,6 +1,7 @@
 import avatar from '../icons/avatar-placeholder.svg';
 import profileReducer from './profile-reducer'
 import messagesReducer from './messages-reducer'
+
 let store = {
   _state: {
     profilePage: {
@@ -102,17 +103,9 @@ let store = {
 
   },
   dispatch(action) {
-    // debugger;
-    let ret = profileReducer(action, this._state.profilePage);
-    console.log(ret);
-    this._state.profilePage = ret;
-    let mes = messagesReducer(action, this._state.messagesPage);
-    this._state.messagesPage = mes;
-    console.log(mes);
+    this._state.profilePage = profileReducer(action, this._state.profilePage);
+    this._state.messagesPage = messagesReducer(action, this._state.messagesPage);
     this._rerenderEntireTree();
-
   }
 }
-
-
 export default store;

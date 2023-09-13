@@ -2,7 +2,6 @@ const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 function messagesReducer(action, state) {
-    // debugger;
     switch (action.type) {
         case ADD_MESSAGE:
             if (state.newMessageText !== '') {
@@ -19,7 +18,6 @@ function messagesReducer(action, state) {
             state.newMessageText = action.newText;
             return state;
         default:
-            console.log("Error");
             return state;
     }
 }

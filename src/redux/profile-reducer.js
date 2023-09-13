@@ -26,9 +26,8 @@ function profileReducer(action, state) {
             //Не могу возвращать что то кроме state нужна другая логика  или еще что то придумать 
             return state;
         case GET_POSTS:
-            return state.posts;
+            return state;
         default:
-            console.log("Error");
             return state;
     }
 }
