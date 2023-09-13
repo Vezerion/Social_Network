@@ -23,6 +23,7 @@ function profileReducer(action, state) {
             state.newPostText = action.newText;
             return state;
         case GET_NEW_POST_TEXT:
+            //Не могу возвращать что то кроме state нужна другая логика  или еще что то придумать 
             return state;
         case GET_POSTS:
             return state.posts;
