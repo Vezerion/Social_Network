@@ -5,7 +5,7 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { createRef } from 'react';
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../redux/messages-reducer'
+import { addMessageActionCreator, updateNewMessageTextActionCreator, getMessagesActionCreator} from '../redux/messages-reducer'
 function Messages(props) {
     const messageArea = createRef();
     const addMessage = () => {
@@ -21,7 +21,7 @@ function Messages(props) {
         <div className="messages">
             <div className="messages_chats">
                 {
-                    props.store.getPartners().map((item) => {
+                    props.store.dispatch(getMessagesActionCreator()).map((item) => {
                         return <ChatPartner key={item.id} id={`${item.id}`} name={item.name} avatar={item.avatar} />
                     })
                 }
