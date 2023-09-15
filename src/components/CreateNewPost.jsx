@@ -12,10 +12,7 @@ function CreateNewPost(props) {
         props.close();
     }
     const onPostChange = (e) => {
-        console.log(e.target.value);
-        
         props.store.dispatch(updateNewPostTextActionCreator(e.target.value));
-        console.log(props.store.getState().profilePage.newPostText);
     }
     const getNewPostText = () => {
         return props.store.getState().profilePage.newPostText;

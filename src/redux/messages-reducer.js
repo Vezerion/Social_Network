@@ -56,7 +56,7 @@ export default messagesReducer;
 
 export function addMessageActionCreator() {
     return {
-        type: 'ADD-MESSAGE'
+        type: ADD_MESSAGE
     }
 }
 
