@@ -5,15 +5,20 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+let counter = 0;
 const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <App store={store}/>
         </React.StrictMode>
     );
+    
+    counter++;
+    console.log(`rendered ${counter} times`);
 }
 rerenderEntireTree();
-store.subscribe(rerenderEntireTree());
+store.subscribe(rerenderEntireTree);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

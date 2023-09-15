@@ -1,7 +1,5 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const GET_NEW_POST_TEXT = 'GET-NEW-POST-TEXT';
-const GET_POSTS = 'GET-POSTS'
 
 
 let initialState = {
@@ -14,12 +12,11 @@ let initialState = {
         ],
         newPostText: ''
 }
-function profileReducer(action, state = initialState) {
-    if(action === undefined) {
-        console.log(state);
-    } else {
-        
-    }
+function profileReducer(state = initialState, action) {
+    // debugger;
+    // state = initialState;
+    // console.log(state);
+    // console.log(action);
     switch (action.type) {
         case ADD_POST:
             if (state.newPostText !== '') {
@@ -37,11 +34,6 @@ function profileReducer(action, state = initialState) {
         case UPDATE_NEW_POST_TEXT:
             state.newPostText = action.newText;
             return state;
-        case GET_NEW_POST_TEXT:
-            //Не могу возвращать что то кроме state нужна другая логика  или еще что то придумать 
-            return state;
-        case GET_POSTS:
-            return state;
         default:
             return state;
     }
@@ -57,17 +49,6 @@ export function updateNewPostTextActionCreator(newText) {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
-    }
-}
-export function getNewPostTextActionCreator() {
-    return {
-        type: GET_NEW_POST_TEXT
-    }
-}
-
-export function getPostsActionCreator() {
-    return {
-        type: GET_POSTS
     }
 }
 

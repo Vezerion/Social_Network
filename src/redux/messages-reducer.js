@@ -1,7 +1,7 @@
 import avatar from '../icons/avatar-placeholder.svg';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-const GET_MESSAGES = 'GET-MESSAGES';
+const CLEAR_NEW_MESSAGE_TEXT = 'CLEAR-NEW-MESSAGE-TEXT';
 let initialState = {
         partners: [
           { id: 0, name: "Lorem Ipsum", avatar: avatar },
@@ -28,12 +28,12 @@ let initialState = {
         ],
         newMessageText: ''
 }
-function messagesReducer(action, state = initialState) {
+function messagesReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_MESSAGE:
             if (state.newMessageText !== '') {
                 const newMessage = {
-                    id: 5,
+                    id: 55,
                     author: 'You',
                     text: state.newMessageText
                 }
@@ -44,7 +44,8 @@ function messagesReducer(action, state = initialState) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.newText;
             return state;
-        case GET_MESSAGES:
+        case CLEAR_NEW_MESSAGE_TEXT:
+            state.newMessageText = '';
             return state;
         default:
             return state;
@@ -59,17 +60,15 @@ export function addMessageActionCreator() {
     }
 }
 
-
+export function clearNewMessageTextActionCreator(){
+    return {
+        type: CLEAR_NEW_MESSAGE_TEXT
+    }
+}
 
 export function updateNewMessageTextActionCreator(newText) {
     return {
         type: 'UPDATE-NEW-MESSAGE-TEXT',
         newText: newText
-    }
-}
-
-export function getMessagesActionCreator() {
-    return {
-        type: GET_MESSAGES
     }
 }

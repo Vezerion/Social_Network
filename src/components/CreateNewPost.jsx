@@ -6,12 +6,16 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../redux/profile-reducer'
 function CreateNewPost(props) {
+    
     const addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.store.dispatch(addPostActionCreator());
         props.close();
     }
     const onPostChange = (e) => {
-        props.dispatch(updateNewPostTextActionCreator(e.target.value));
+        console.log(e.target.value);
+        
+        props.store.dispatch(updateNewPostTextActionCreator(e.target.value));
+        console.log(props.store.getState().profilePage.newPostText);
     }
     const getNewPostText = () => {
         return props.store.getState().profilePage.newPostText;
@@ -28,7 +32,7 @@ function CreateNewPost(props) {
                 </button>
                 <div className="modal_content">
                     <div className="modal_content_username">Lorem ipsum</div>
-                    <textarea placeholder='write here' className="modal_content_textarea" value={getNewPostText()} onChange={onPostChange}/>
+                    <textarea placeholder='write here' className="modal_content_textarea"  onChange={onPostChange} value={getNewPostText()}/>
                     <div className="modal_content_btns">
                         <button onClick={addPost} className="modal_content_btns_send modal_content_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
