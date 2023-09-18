@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let counter = 0;
+// let counter = 0;
 const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
@@ -13,8 +13,8 @@ const rerenderEntireTree = () => {
         </React.StrictMode>
     );
     
-    counter++;
-    console.log(`rendered ${counter} times`);
+    // counter++;
+    // console.log(`rendered ${counter} times`);
 }
 rerenderEntireTree();
 store.subscribe(rerenderEntireTree);

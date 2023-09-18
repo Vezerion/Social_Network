@@ -1,23 +1,18 @@
-import avatar from '../icons/avatar-placeholder.svg'
+import avatar from '../../../icons/avatar-placeholder.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../redux/profile-reducer'
+// Передавать в value у textarea props.dispatch(getNewPostTextActionCreator()); категорически запрещено тк в dispatch вызывается функция рендер из за чего компонента ререндерится и функция dispatch вызывается по новой и получается рекурсия рендера приложение и оно подыхает.
 function CreateNewPost(props) {
-    
-    const addPost = () => {
-        props.store.dispatch(addPostActionCreator());
+    const onPostAdd = () => {
+        props.addPost();
         props.close();
     }
     const onPostChange = (e) => {
-        props.store.dispatch(updateNewPostTextActionCreator(e.target.value));
+        props.updatePosts(e.target.value);
     }
-    const getNewPostText = () => {
-        return props.store.getState().profilePage.newPostText;
-    }
-    // Передавать в value у textarea props.dispatch(getNewPostTextActionCreator()); категорически запрещено тк в dispatch вызывается функция рендер из за чего компонента ререндерится и функция dispatch вызывается по новой и получается рекурсия рендера приложение и оно подыхает.
     return (
         <div className='modal'>
             <div className="modal_wrapper">
@@ -29,9 +24,9 @@ function CreateNewPost(props) {
                 </button>
                 <div className="modal_content">
                     <div className="modal_content_username">Lorem ipsum</div>
-                    <textarea placeholder='write here' className="modal_content_textarea"  onChange={onPostChange} value={getNewPostText()}/>
+                    <textarea placeholder='write here' className="modal_content_textarea" onChange={onPostChange} value={props.getNewPostText()}/>
                     <div className="modal_content_btns">
-                        <button onClick={addPost} className="modal_content_btns_send modal_content_btns_btn">
+                        <button onClick={onPostAdd} className="modal_content_btns_send modal_content_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </button>
                         <button className="modal_content_btns_clear modal_content_btns_btn">

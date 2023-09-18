@@ -4,7 +4,7 @@ function Message(props) {
             <div className="message_text">
                 {props.text}
             </div>
-            <div className="message_author"><span className="message_author_from">from</span>  {props.author}</div>
+            <div className="message_author"><span className="message_author_from">from</span> {props.author}</div>
             
         </div>
     )

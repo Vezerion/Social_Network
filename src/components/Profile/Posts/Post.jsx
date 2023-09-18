@@ -1,4 +1,4 @@
-import logo from '../icons/logo.png'
+import logo from '../../../icons/logo.png'
 // import placeholder from '../icons/placeholder.png'
 function Post(props) {
     return (

@@ -1,4 +1,4 @@
-import logo from '../icons/logo.png'
+import logo from '../../icons/logo.png'
 function Header() {
     return (
         <header className='header'>

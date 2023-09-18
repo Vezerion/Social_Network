@@ -4,22 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
-import { addMessageActionCreator, updateNewMessageTextActionCreator, clearNewMessageTextActionCreator} from '../redux/messages-reducer'
 function Messages(props) {
-    const addMessage = () => {
-        props.store.dispatch(addMessageActionCreator());
+    const onMessageAdd = () => {
+        props.addMessage();
     };
     const onMessageChange = (e) => {
-        props.store.dispatch(updateNewMessageTextActionCreator(e.target.value));
+        props.updateMessage(e.target.value);
     }
-    const clearText = () => {
-        props.store.dispatch(clearNewMessageTextActionCreator());
+    const onTextClear = () => {
+        props.clearText();
     }
     return (
         <div className="messages">
             <div className="messages_chats">
                 {
-                    props.store.getState().messagesPage.partners.map((item) => {
+                    props.messagesPage.partners.map((item) => {
                         return <ChatPartner key={item.id} id={`${item.id}`} name={item.name} avatar={item.avatar} />
                     })
                 }
@@ -28,18 +27,18 @@ function Messages(props) {
             <div className="messages_chat">
                 <div className="messages_chat_wrapper">
                     {
-                        props.store.getState().messagesPage.messages.map((item) => {
+                        props.messagesPage.messages.map((item) => {
                             return <Message key={item.id} author={item.author} text={item.text} />
                         })
                     }
                 </div>
                 <div className="messages_chat_textarea_wrapper">
-                    <textarea className="messages_chat_textarea" required onChange={onMessageChange} value={props.store.getState().messagesPage.newMessageText} />
+                    <textarea className="messages_chat_textarea" required onChange={onMessageChange} value={props.messagesPage.newMessageText} />
                     <div className="messages_chat_btns">
-                        <button onClick={addMessage} className="messages_chat_btns_send messages_chat_btns_btn">
+                        <button onClick={onMessageAdd} className="messages_chat_btns_send messages_chat_btns_btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </button>
-                        <button onClick={clearText} className="messages_chat_btns_clear messages_chat_btns_btn">
+                        <button onClick={onTextClear} className="messages_chat_btns_clear messages_chat_btns_btn">
                             <FontAwesomeIcon icon={faTrashCan} />
                         </button>
                         <button className="messages_chat_btns_clip messages_chat_btns_btn">
