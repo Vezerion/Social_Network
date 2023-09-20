@@ -17,25 +17,27 @@ function profileReducer(state = initialState, action) {
     // state = initialState;
     // console.log(state);
     // console.log(action);
+    let stateCopy = { ...state };
     switch (action.type) {
         case ADD_POST:
-            if (state.newPostText !== '') {
+            if (stateCopy.newPostText !== '') {
                 const newPost = {
                     id: 5,
                     date: '06.09.2023',
                     title: 'stupid function',
-                    post: state.newPostText
+                    post: stateCopy.newPostText
                 }
-                state.posts.push(newPost);
-                state.newPostText = '';
-                return state;
+                stateCopy.posts = [...state.posts];
+                stateCopy.posts.push(newPost);
+                stateCopy.newPostText = '';
+                return stateCopy;
             }
-            return state;
+            return stateCopy;
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
         default:
-            return state;
+            return stateCopy;
     }
 }
 
