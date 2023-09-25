@@ -13,13 +13,9 @@ let initialState = {
         newPostText: ''
 }
 function profileReducer(state = initialState, action) {
-    // debugger;
-    // state = initialState;
-    // console.log(state);
-    // console.log(action);
-    let stateCopy = { ...state };
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
+            let stateCopy = { ...state };
             if (stateCopy.newPostText !== '') {
                 const newPost = {
                     id: 5,
@@ -33,11 +29,16 @@ function profileReducer(state = initialState, action) {
                 return stateCopy;
             }
             return stateCopy;
-        case UPDATE_NEW_POST_TEXT:
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            let stateCopy = { ...state };
             stateCopy.newPostText = action.newText;
             return stateCopy;
-        default:
+        }
+        default: {
+            let stateCopy = { ...state };
             return stateCopy;
+        }
     }
 }
 
