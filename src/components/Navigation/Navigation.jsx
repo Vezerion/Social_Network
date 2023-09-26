@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { faMessage } from '@fortawesome/free-solid-svg-icons'
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
@@ -15,6 +15,10 @@ function Navigation() {
             <div className="navigation_item navigation_messages">
                 <FontAwesomeIcon className ='navigation_item_icon' icon={faMessage} />
                 <NavLink to="/messages" className='navigation_item_name'>Messages</NavLink> 
+            </div>
+            <div className="navigation_item navigation_friends">
+                <FontAwesomeIcon className ='navigation_item_icon' icon={faUserGroup} />
+                <NavLink to="/friends" className='navigation_item_name'>Friends</NavLink> 
             </div>
             <div className="navigation_item navigation_news">
                 <FontAwesomeIcon className ='navigation_item_icon' icon={faNewspaper} />
