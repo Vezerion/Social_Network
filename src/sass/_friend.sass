@@ -1,0 +1,40 @@
+.user
+    width: 600px
+    height: 150px
+    display: grid
+    padding: 15px
+    grid-template-areas: "photo status" "photo status" "name button"
+    grid-template-rows: 60px 30px 30px
+    column-gap: 20px
+    grid-template-columns: 155px 400px
+    background-color: #fff
+    border-radius: 20px
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2)
+    &_photo
+        width: 90px
+        height: 90px
+        &_wrapper
+            justify-self: center
+            grid-area: photo
+    &_name
+        grid-area: name
+        justify-self: center
+    &_status
+        grid-area: status
+        align-self: center
+        color: #1051dd
+    &_btn
+        grid-area: button
+        width: 150px
+        height: 25px
+        justify-self: center
+        border-radius: 15px
+        outline: none
+        border: none
+        background-color: #4173fd91
+        color: #000
+        cursor: pointer
+        font-size: 16px
+        &:hover
+            background-color: #4173fd
+    

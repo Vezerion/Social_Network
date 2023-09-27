@@ -1,14 +1,25 @@
 import User from './User'
+
+import axios from 'axios';
 function Friends(props) {
-    if(props.friends.length === 0) {
-        props.setUsers([{ id: 1, followed: true, fullname: 'Mike', status: 'Lets go' }, { id: 2, followed: false, fullname: 'Niki', status: 'come on' }, { id: 3, followed: false, fullname: 'Jake', status: 'here we go' }]);
+    const getUsers = () => {
+        if(props.friends.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(data => {
+                console.log(data.data.items);
+                props.setUsers(data.data.items);
+            });
+            
+        }
     }
+    
     return (
-        <div>
+        <div className='friends'>
+            <button onClick={getUsers}>Get Users</button>
             {
             props.friends.map(user=> {
                 return (
-                    <User key={user.id} fullname={user.fullname} id={user.id} status={user.status} followed={user.followed} follow={props.follow} unfollow={props.unfollow}/>
+                    <User key={user.id} name={user.name} photos={user.photos} id={user.id} status={user.status} followed={user.followed} follow={props.follow} unfollow={props.unfollow}/>
                 )
             })
             }
