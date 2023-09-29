@@ -10,7 +10,7 @@ function User(props) {
     }
     return (
         <div id={props.id} className="user">
-            <div className="user_photo_wrapper"><img className="user_photo" src={props.photos.small != null && props.photo.large != null ? props.photo.large : avatar} alt="avatar" /></div>
+            <div className="user_photo_wrapper"><img className="user_photo" src={props.photos.small != null ? props.photos.small : avatar} alt="avatar" /></div>
             <div className="user_name">{props.name}</div>
             <div className="user_status">{props.status}</div>
             <button className="user_btn" onClick={props.followed ? unfollow : follow}>
@@ -18,26 +18,6 @@ function User(props) {
             </button>
         </div>
     )
-    // if(props.followed === true) {
-    //     return (
-    //         <div id={props.id}>
-    //             <div>{props.fullname}</div>
-    //             <div>{props.status}</div>
-    //             <button onClick={unfollow}>unfollow</button>
-    //             <hr></hr>
-    //         </div>
-    //     )
-    // } else {
-    //     return (
-    //         <div id={props.id}>
-    //             <div>{props.fullname}</div>
-    //             <div>{props.status}</div>
-    //             <button onClick={follow}>follow</button>
-    //             <hr></hr>
-    //         </div>
-    //     )
-    // }
-
 }
 
 export default User;

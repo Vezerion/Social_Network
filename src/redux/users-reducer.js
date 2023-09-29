@@ -1,8 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const CHANGE_PAGE = 'CHANGE-PAGE'
+const SET_TOTAL_PAGES = 'SET-TOTAL-PAGES';
+const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 let initialState = {
-    users: []
+    users: [],
+    totalPages: 0,
+    pageSize: 5,
+    page: 1
 }
 function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -10,6 +16,21 @@ function userReducer(state = initialState, action) {
             return {
                 ...state,
                 users: [...action.users]
+            }
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                page: action.page
+            }
+        case SET_TOTAL_PAGES:
+            return {
+                ...state,
+                totalPages: action.totalPages
+            }
+        case SET_PAGE_SIZE:
+            return {
+                ...state,
+                pageSize: action.pageSize
             }
         case FOLLOW:
             return {
@@ -50,6 +71,12 @@ export function setUsersAC(users) {
         users: users
     }
 }
+export function changePage(page) {
+    return {
+        type: CHANGE_PAGE,
+        page: page
+    }
+}
 export function followAC(userID) {
     return {
         type: FOLLOW,
@@ -60,6 +87,18 @@ export function unfollowAC(userID) {
     return {
         type: UNFOLLOW,
         id: userID
+    }
+}
+export function setTotalPages(totalPages) {
+    return {
+        type: SET_TOTAL_PAGES,
+        totalPages: totalPages
+    }
+}
+export function setPageSize(pageSize) {
+    return {
+        type: SET_PAGE_SIZE,
+        pageSize: pageSize
     }
 }
 
