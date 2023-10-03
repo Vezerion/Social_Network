@@ -4,11 +4,14 @@ const SET_USERS = 'SET-USERS';
 const CHANGE_PAGE = 'CHANGE-PAGE'
 const SET_TOTAL_PAGES = 'SET-TOTAL-PAGES';
 const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+
 let initialState = {
     users: [],
     totalPages: 0,
     pageSize: 5,
-    page: 1
+    page: 1,
+    isFetching: false
 }
 function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -58,6 +61,8 @@ function userReducer(state = initialState, action) {
                     return user;
                 })
             }
+        case TOGGLE_IS_FETCHING:
+            return { ...state, isFetching: action.isFetching}
         default:
             return {
                 ...state
@@ -99,6 +104,12 @@ export function setPageSize(pageSize) {
     return {
         type: SET_PAGE_SIZE,
         pageSize: pageSize
+    }
+}
+export function toggleIsFetchingAC(isFetching) {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching: isFetching
     }
 }
 
