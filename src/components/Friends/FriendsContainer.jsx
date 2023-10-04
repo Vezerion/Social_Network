@@ -1,4 +1,4 @@
-import { setUsersAC, followAC, unfollowAC, changePage, setTotalPages, setPageSize, toggleIsFetchingAC, setTotalUsersCountAC, changeNumberOfLastUserAC} from '../../redux/users-reducer';
+import { setUsers, follow, unfollow, changePage, setTotalPages, setPageSize, toggleIsFetching, setTotalUsersCount, changeNumberOfLastUser } from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import React from 'react';
@@ -14,13 +14,13 @@ class FriendsAJAX extends React.Component {
                 this.props.setUsers(data.data.items);
                 this.props.setTotalUsersCount(data.data.totalCount);
                 this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
-                this.props.changeNubmerOfLastUser(this.props.pageSize, this.props.page);
+                this.props.changeNumberOfLastUser(this.props.pageSize, this.props.page);
                 this.props.toggleIsFetching(false);
             });
     }
     componentDidUpdate(prevProps) {
         if (this.props.page !== prevProps.page || this.props.pageSize !== prevProps.pageSize) {
-            if(this.props.pageSize > prevProps.pageSize) {
+            if (this.props.pageSize > prevProps.pageSize) {
                 this.props.changePage(Math.ceil(this.props.numberOfLastUser / this.props.pageSize));
             }
             this.props.toggleIsFetching(true);
@@ -28,7 +28,7 @@ class FriendsAJAX extends React.Component {
                 .then(data => {
                     this.props.setUsers(data.data.items);
                     this.props.setTotalUsersCount(data.data.totalCount);
-                    this.props.changeNubmerOfLastUser(this.props.pageSize, this.props.page);
+                    this.props.changeNumberOfLastUser(this.props.pageSize, this.props.page);
                     this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
                     this.props.toggleIsFetching(false);
                 });
@@ -36,7 +36,7 @@ class FriendsAJAX extends React.Component {
 
     }
     render() {
-        return this.props.isFetching ? <Preloader/> : <Friends pageSize={this.props.pageSize} page={this.props.page} setPageSize={this.props.setPageSize} changePage={this.props.changePage} totalPages={this.props.totalPages} follow={this.props.follow} unfollow={this.props.unfollow} friends={this.props.friends}/>
+        return this.props.isFetching ? <Preloader /> : <Friends pageSize={this.props.pageSize} page={this.props.page} setPageSize={this.props.setPageSize} changePage={this.props.changePage} totalPages={this.props.totalPages} follow={this.props.follow} unfollow={this.props.unfollow} friends={this.props.friends} />
     }
 }
 
@@ -52,37 +52,15 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        unfollow: (userID) => {
-            dispatch(unfollowAC(userID));
-        },
-        follow: (userID) => {
-            dispatch(followAC(userID));
-        },
-        changePage: (page) => {
-            dispatch(changePage(page));
-        },
-        setTotalPages: (totalPages) => {
-            dispatch(setTotalPages(totalPages));
-        },
-        setPageSize: (pageSize) => {
-            dispatch(setPageSize(pageSize));
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-        changeNubmerOfLastUser: (pageSize, currentPage) => {
-            dispatch(changeNumberOfLastUserAC(pageSize, currentPage));
-        }
-    }
-}
-
-const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsAJAX);
+const FriendsContainer = connect(mapStateToProps, {
+    setUsers,
+    unfollow,
+    follow,
+    changePage,
+    setTotalPages,
+    setPageSize,
+    setTotalUsersCount,
+    toggleIsFetching,
+    changeNumberOfLastUser
+})(FriendsAJAX);
 export default FriendsContainer;

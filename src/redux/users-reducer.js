@@ -86,7 +86,7 @@ function userReducer(state = initialState, action) {
     }
 }
 
-export function setUsersAC(users) {
+export function setUsers(users) {
     return {
         type: SET_USERS,
         users: users
@@ -98,13 +98,13 @@ export function changePage(page) {
         page: page
     }
 }
-export function followAC(userID) {
+export function follow(userID) {
     return {
         type: FOLLOW,
         id: userID
     }
 }
-export function unfollowAC(userID) {
+export function unfollow(userID) {
     return {
         type: UNFOLLOW,
         id: userID
@@ -116,13 +116,13 @@ export function setTotalPages(totalPages) {
         totalPages: totalPages
     }
 }
-export function setTotalUsersCountAC(totalUsersCount) {
+export function setTotalUsersCount(totalUsersCount) {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount: totalUsersCount
     }
 }
-export function changeNumberOfLastUserAC(pageSize, currentPage) {
+export function changeNumberOfLastUser(pageSize, currentPage) {
     return {
         type: CHANGE_NUMBER_OF_LAST_USER,
         pageSize: pageSize,
@@ -135,7 +135,7 @@ export function setPageSize(pageSize) {
         pageSize: pageSize
     }
 }
-export function toggleIsFetchingAC(isFetching) {
+export function toggleIsFetching(isFetching) {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching: isFetching

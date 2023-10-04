@@ -13,7 +13,7 @@ function Friends(props) {
                 <div className='friends_counter'>Показывать по:
                     {
                         show.map((count => {
-                            return <span className={`friends_counter_value ${props.pageSize === count ? 'friends_counter_value_active': ''}`} onClick={() => { props.setPageSize(count) }}>{count}</span>
+                            return <span key={count} className={`friends_counter_value ${props.pageSize === count ? 'friends_counter_value_active': ''}`} onClick={() => { props.setPageSize(count) }}>{count}</span>
                         }))
                     }
                     </div>
@@ -22,7 +22,7 @@ function Friends(props) {
                     <span>...</span>
                     {
                         pages.map((page) => {
-                            return <span onClick={() => { props.changePage(page) }} className={`friends_pages_page ${page === props.page ? 'friends_pages_page_active': ''}`} >{page}</span>
+                            return <span key={page} onClick={() => { props.changePage(page) }} className={`friends_pages_page ${page === props.page ? 'friends_pages_page_active': ''}`} >{page}</span>
                         })
                     }
                     <span>...</span>
