@@ -1,8 +1,9 @@
 
-
 function Preloader(props) {
     return (
-        <img src="https://i.gifer.com/ZKZg.gif" alt="" />
+        <div className="preloader">
+            <img className="preloader_img" src="https://i.gifer.com/ZKZg.gif" alt="" />
+        </div>
     )
 }
 

@@ -1,4 +1,4 @@
-import { setUsersAC, followAC, unfollowAC, changePage, setTotalPages, setPageSize, toggleIsFetchingAC} from '../../redux/users-reducer';
+import { setUsersAC, followAC, unfollowAC, changePage, setTotalPages, setPageSize, toggleIsFetchingAC, setTotalUsersCountAC, changeNumberOfLastUserAC} from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import React from 'react';
@@ -12,17 +12,23 @@ class FriendsAJAX extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`)
             .then(data => {
                 this.props.setUsers(data.data.items);
+                this.props.setTotalUsersCount(data.data.totalCount);
                 this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
+                this.props.changeNubmerOfLastUser(this.props.pageSize, this.props.page);
                 this.props.toggleIsFetching(false);
             });
     }
     componentDidUpdate(prevProps) {
         if (this.props.page !== prevProps.page || this.props.pageSize !== prevProps.pageSize) {
-            console.log(this.props.page)
+            if(this.props.pageSize > prevProps.pageSize) {
+                this.props.changePage(Math.ceil(this.props.numberOfLastUser / this.props.pageSize));
+            }
             this.props.toggleIsFetching(true);
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`)
                 .then(data => {
                     this.props.setUsers(data.data.items);
+                    this.props.setTotalUsersCount(data.data.totalCount);
+                    this.props.changeNubmerOfLastUser(this.props.pageSize, this.props.page);
                     this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
                     this.props.toggleIsFetching(false);
                 });
@@ -40,7 +46,9 @@ function mapStateToProps(state) {
         page: state.friendsPage.page,
         pageSize: state.friendsPage.pageSize,
         totalPages: state.friendsPage.totalPages,
-        isFetching: state.friendsPage.isFetching
+        totalUsers: state.friendsPage.totalUsersCount,
+        isFetching: state.friendsPage.isFetching,
+        numberOfLastUser: state.friendsPage.numberOfTheLastShowenUser
     }
 }
 
@@ -61,11 +69,17 @@ function mapDispatchToProps(dispatch) {
         setTotalPages: (totalPages) => {
             dispatch(setTotalPages(totalPages));
         },
-        setPageSize: (pageSize)=> {
+        setPageSize: (pageSize) => {
             dispatch(setPageSize(pageSize));
+        },
+        setTotalUsersCount: (totalUsersCount) => {
+            dispatch(setTotalUsersCountAC(totalUsersCount));
         },
         toggleIsFetching: (isFetching) => {
             dispatch(toggleIsFetchingAC(isFetching))
+        },
+        changeNubmerOfLastUser: (pageSize, currentPage) => {
+            dispatch(changeNumberOfLastUserAC(pageSize, currentPage));
         }
     }
 }

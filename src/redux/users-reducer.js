@@ -4,11 +4,15 @@ const SET_USERS = 'SET-USERS';
 const CHANGE_PAGE = 'CHANGE-PAGE'
 const SET_TOTAL_PAGES = 'SET-TOTAL-PAGES';
 const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
+const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const CHANGE_NUMBER_OF_LAST_USER = 'CHANGE-NUMBER-OF-LAST-USER';
 
 let initialState = {
     users: [],
     totalPages: 0,
+    totalUsersCount: 0,
+    numberOfTheLastShowenUser: 5,
     pageSize: 5,
     page: 1,
     isFetching: false
@@ -34,6 +38,11 @@ function userReducer(state = initialState, action) {
             return {
                 ...state,
                 pageSize: action.pageSize
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state, 
+                totalUsersCount: action.totalUsersCount
             }
         case FOLLOW:
             return {
@@ -62,7 +71,14 @@ function userReducer(state = initialState, action) {
                 })
             }
         case TOGGLE_IS_FETCHING:
-            return { ...state, isFetching: action.isFetching}
+            return {
+                 ...state, isFetching: action.isFetching
+            }
+        case CHANGE_NUMBER_OF_LAST_USER:
+            return {
+                ...state,
+                numberOfTheLastShowenUser: Math.ceil(action.pageSize * action.currentPage)
+            }
         default:
             return {
                 ...state
@@ -98,6 +114,19 @@ export function setTotalPages(totalPages) {
     return {
         type: SET_TOTAL_PAGES,
         totalPages: totalPages
+    }
+}
+export function setTotalUsersCountAC(totalUsersCount) {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalUsersCount: totalUsersCount
+    }
+}
+export function changeNumberOfLastUserAC(pageSize, currentPage) {
+    return {
+        type: CHANGE_NUMBER_OF_LAST_USER,
+        pageSize: pageSize,
+        currentPage: currentPage
     }
 }
 export function setPageSize(pageSize) {
