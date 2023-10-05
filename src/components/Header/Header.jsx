@@ -1,5 +1,5 @@
 import logo from '../../icons/logo.png'
-function Header() {
+function Header(props) {
     return (
         <header className='header'>
             <div className='container'>
@@ -8,6 +8,7 @@ function Header() {
                         <img className='logo' src={logo} alt="logo" />
                     </div>
                     <div className='header_text'>Tritter</div>
+                    {props.isAuth ? `Вы вошли под пользователем: ${props.login}` : `Вы не выполнили вход`}
                 </div>
             </div>
         </header>

@@ -1,13 +1,35 @@
+import axios from 'axios';
 import avatar from '../../icons/avatar-placeholder.svg'
 import { NavLink } from 'react-router-dom'
 function User(props) {
     const follow = (e) => {
         let userid = +e.target.parentElement.id;
-        props.follow(userid)
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userid}`, {}, {
+            withCredentials: true,
+            headers: {
+                "API-KEY": "94040af5-bef1-40a6-99dd-b81e9618fdbc"
+            }
+        })
+        .then( response => {
+            if(response.data.resultCode === 0) {
+                props.follow(userid)
+            }
+        });
+        
     }
     const unfollow = (e) => {
         let userid = +e.target.parentElement.id;
-        props.unfollow(userid)
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userid}`, {
+            withCredentials: true,
+            headers: {
+                "API-KEY": "94040af5-bef1-40a6-99dd-b81e9618fdbc"
+            }
+        })
+        .then( response => {
+            if(response.data.resultCode === 0) {
+                props.unfollow(userid)
+            }
+        });
     }
     return (
         <div id={props.id} className="user">

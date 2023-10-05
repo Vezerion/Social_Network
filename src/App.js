@@ -1,5 +1,5 @@
 import './css/main.min.css';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navigation from './components/Navigation/Navigation';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import News from './components/Feed/News';
@@ -13,7 +13,7 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        <Header />
+        <HeaderContainer />
         <div className='container'>
           <div className='container-fluid'>
             <Navigation />

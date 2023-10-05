@@ -9,7 +9,9 @@ class FriendsAJAX extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(data => {
                 this.props.setUsers(data.data.items);
                 this.props.setTotalUsersCount(data.data.totalCount);
@@ -24,7 +26,9 @@ class FriendsAJAX extends React.Component {
                 this.props.changePage(Math.ceil(this.props.numberOfLastUser / this.props.pageSize));
             }
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            })
                 .then(data => {
                     this.props.setUsers(data.data.items);
                     this.props.setTotalUsersCount(data.data.totalCount);
