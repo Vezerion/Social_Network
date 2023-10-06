@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile'
 import { setUserProfile } from '../../redux/profile-reducer'
 import { useParams } from 'react-router-dom';
-
+import { UsersAPI } from '../../api/api';
 
 function WrappedComponent(props) {
     let id = useParams();
@@ -20,9 +19,9 @@ class ProfileAJAX extends React.Component {
             if(!this.props.id.userId){
                 this.props.id.userId = this.props.user;
             }
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.id.userId}`)
+            UsersAPI.getUserProfile(this.props.id.userId)
             .then(data => {
-                this.props.setUserProfile(data.data);
+                this.props.setUserProfile(data);
             });
         }  
     }
@@ -32,9 +31,9 @@ class ProfileAJAX extends React.Component {
             if(!this.props.id.userId){
                 this.props.id.userId = this.props.user;
             }
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.id.userId}`)
+            UsersAPI.getUserProfile(this.props.id.userId)
             .then(data => {
-                this.props.setUserProfile(data.data);
+                this.props.setUserProfile(data);
             });
         }   
     }

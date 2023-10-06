@@ -1,21 +1,18 @@
-import { setUsers, follow, unfollow, changePage, setTotalPages, setPageSize, toggleIsFetching, setTotalUsersCount, changeNumberOfLastUser } from '../../redux/users-reducer';
+import { setUsers, follow, unfollow, changePage, setTotalPages, setPageSize, toggleIsFetching, setTotalUsersCount, changeNumberOfLastUser, toggleFollowingProgress } from '../../redux/users-reducer';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import React from 'react';
 import Friends from './Friends'
 import Preloader from '../common/preloader/preloader';
+import { UsersAPI } from '../../api/api';
 
 class FriendsAJAX extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(data => {
-                this.props.setUsers(data.data.items);
-                this.props.setTotalUsersCount(data.data.totalCount);
-                this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
+        UsersAPI.getUsers(this.props.page, this.props.pageSize).then(data => {
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
+                this.props.setTotalPages(Math.ceil(data.totalCount / this.props.pageSize));
                 this.props.changeNumberOfLastUser(this.props.pageSize, this.props.page);
                 this.props.toggleIsFetching(false);
             });
@@ -26,21 +23,18 @@ class FriendsAJAX extends React.Component {
                 this.props.changePage(Math.ceil(this.props.numberOfLastUser / this.props.pageSize));
             }
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            })
-                .then(data => {
-                    this.props.setUsers(data.data.items);
-                    this.props.setTotalUsersCount(data.data.totalCount);
+            UsersAPI.getUsers(this.props.page, this.props.pageSize).then(data => {
+                    this.props.setUsers(data.items);
+                    this.props.setTotalUsersCount(data.totalCount);
                     this.props.changeNumberOfLastUser(this.props.pageSize, this.props.page);
-                    this.props.setTotalPages(Math.ceil(data.data.totalCount / this.props.pageSize));
+                    this.props.setTotalPages(Math.ceil(data.totalCount / this.props.pageSize));
                     this.props.toggleIsFetching(false);
                 });
         }
 
     }
     render() {
-        return this.props.isFetching ? <Preloader /> : <Friends pageSize={this.props.pageSize} page={this.props.page} setPageSize={this.props.setPageSize} changePage={this.props.changePage} totalPages={this.props.totalPages} follow={this.props.follow} unfollow={this.props.unfollow} friends={this.props.friends} />
+        return this.props.isFetching ? <Preloader /> : <Friends pageSize={this.props.pageSize} page={this.props.page} setPageSize={this.props.setPageSize} changePage={this.props.changePage} totalPages={this.props.totalPages} follow={this.props.follow} unfollow={this.props.unfollow} friends={this.props.friends} followingProgress={this.props.followingProgress} toggleFollowingProgress={this.props.toggleFollowingProgress}/>
     }
 }
 
@@ -52,7 +46,8 @@ function mapStateToProps(state) {
         totalPages: state.friendsPage.totalPages,
         totalUsers: state.friendsPage.totalUsersCount,
         isFetching: state.friendsPage.isFetching,
-        numberOfLastUser: state.friendsPage.numberOfTheLastShowenUser
+        numberOfLastUser: state.friendsPage.numberOfTheLastShowenUser,
+        followingProgress: state.friendsPage.followingInProgress
     }
 }
 
@@ -65,6 +60,7 @@ const FriendsContainer = connect(mapStateToProps, {
     setPageSize,
     setTotalUsersCount,
     toggleIsFetching,
-    changeNumberOfLastUser
+    changeNumberOfLastUser,
+    toggleFollowingProgress
 })(FriendsAJAX);
 export default FriendsContainer;

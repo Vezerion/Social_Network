@@ -7,6 +7,7 @@ const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const CHANGE_NUMBER_OF_LAST_USER = 'CHANGE-NUMBER-OF-LAST-USER';
+const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE-FOLLOWING-PROGRESS'
 
 let initialState = {
     users: [],
@@ -15,7 +16,8 @@ let initialState = {
     numberOfTheLastShowenUser: 5,
     pageSize: 5,
     page: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -73,6 +75,10 @@ function userReducer(state = initialState, action) {
         case TOGGLE_IS_FETCHING:
             return {
                  ...state, isFetching: action.isFetching
+            }
+        case TOGGLE_FOLLOWING_PROGRESS:
+            return {
+                 ...state, followingInProgress: action.isFetching ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(id => id !== action.id)
             }
         case CHANGE_NUMBER_OF_LAST_USER:
             return {
@@ -139,6 +145,14 @@ export function toggleIsFetching(isFetching) {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching: isFetching
+    }
+}
+
+export function toggleFollowingProgress(isFetching, id) {
+    return {
+        type: TOGGLE_FOLLOWING_PROGRESS,
+        isFetching: isFetching,
+        id: id
     }
 }
 

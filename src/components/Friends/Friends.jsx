@@ -32,7 +32,7 @@ function Friends(props) {
                 {
                     props.friends.map(user => {
                         return (
-                            <User key={user.id} name={user.name} photos={user.photos} id={user.id} status={user.status} followed={user.followed} follow={props.follow} unfollow={props.unfollow} />
+                            <User key={user.id} name={user.name} photos={user.photos} id={user.id} status={user.status} followed={user.followed} follow={props.follow} unfollow={props.unfollow} followingProgress={props.followingProgress} toggleFollowingProgress={props.toggleFollowingProgress}/>
                         )
                     })
                 }
