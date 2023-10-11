@@ -2,7 +2,7 @@ import ProfileInfo from './ProfileInfo';
 import PostsContainer from './Posts/PostsContainer';
 import Preloader from '../common/preloader/preloader';
 function Profile(props) {
-    if (!props.profile) {
+    if (props.isFetching || !props.profile) {
         return <Preloader/>
     } else {
         return (

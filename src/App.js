@@ -7,7 +7,8 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/Login/Login';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 function App(props) {
   return (
@@ -19,18 +20,17 @@ function App(props) {
             <Navigation />
             <div className='content'>
               <Routes>
-                <Route path='/:userId?' element={<ProfileContainer/>}/>
-                <Route path="/profile/:userId?" element={<ProfileContainer/>} />
-                <Route path="/messages/*" element={<MessagesContainer store={props.store}/>} />
+                <Route path='/' element={<Navigate to="/profile" />} />
+                <Route path="/profile/:userId?" element={<ProfileContainer />} />
+                <Route path="/messages/*" element={<MessagesContainer store={props.store} />} />
                 <Route path="/friends" element={<FriendsContainer />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
-              </Routes> 
+                <Route path="/login" element={<Login />} />
+              </Routes>
             </div>
-
           </div>
-
         </div>
         <footer>
         </footer>

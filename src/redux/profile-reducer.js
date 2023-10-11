@@ -1,6 +1,8 @@
+import { UsersAPI } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 
 let initialState = {
     posts: [
@@ -11,7 +13,8 @@ let initialState = {
         { id: 4, date: '04.09.23', title: 'Now all data in index.js', post: 'It`s working, but is it truly the way that i should give the data to my components? i dont think so.' }
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    isFetching: false
 }
 function profileReducer(state = initialState, action) {
     switch (action.type) {
@@ -37,6 +40,11 @@ function profileReducer(state = initialState, action) {
                 ...state,
                 profile: action.data
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.flag
+            }
         default:
             return {
                 ...state
@@ -44,7 +52,7 @@ function profileReducer(state = initialState, action) {
     }
 }
 
-
+// Action Creators
 export function addPostActionCreator() {
     return {
         type: ADD_POST
@@ -56,10 +64,32 @@ export function updateNewPostTextActionCreator(newText) {
         newText: newText
     }
 }
-export function setUserProfile(data) {
+export function setUserProfileData(data) {
     return {
         type: SET_USER_PROFILE,
         data: data
+    }
+}
+export function setFetching(flag) {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        flag: flag
+    }
+}
+
+// Thunk Creators
+
+export const setUserProfile = (id, userId) => {
+    return (dispatch) => {
+        if(!id){
+            id = userId;
+        }
+        dispatch(setFetching(true));
+        UsersAPI.getUserProfile(id)
+        .then(data => {
+            dispatch(setUserProfileData(data));
+            dispatch(setFetching(false));
+        });
     }
 }
 export default profileReducer;

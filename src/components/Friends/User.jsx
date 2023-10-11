@@ -1,28 +1,11 @@
 import avatar from '../../icons/avatar-placeholder.svg'
 import { NavLink } from 'react-router-dom'
-import { UsersAPI } from '../../api/api';
 function User(props) {
-    console.log(props.followingProgress);
     const follow = () => {
-        props.toggleFollowingProgress(true, props.id);
-        UsersAPI.followUser(props.id)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    props.follow(props.id)
-                }
-                props.toggleFollowingProgress(false, props.id);
-            });
-
+        props.follow(props.id);
     }
     const unfollow = () => {
-        props.toggleFollowingProgress(true, props.id);
-        UsersAPI.unfollowUser(props.id)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    props.unfollow(props.id)
-                }
-                props.toggleFollowingProgress(false, props.id);
-            });
+        props.unfollow(props.id);
     }
     return (
         <div id={props.id} className="user">

@@ -1,8 +1,9 @@
+import { UsersAPI } from "../api/api";
 const SET_AUTH_USER = 'SET-AUTH-USER';
 
 
 let initialState = {
-    userId: null,    
+    userId: null, 
     email: null,
     login: null,
     isAuth: false,
@@ -24,11 +25,23 @@ function authReducer(state = initialState, action) {
     }
 }
 
-
+// Action Creators
 export function setAuthUserData(login, email, userId) {
     return {
         type: SET_AUTH_USER,
         data: {userId, login, email}
+    }
+}
+// ThunksCreators
+
+export const authUser = () => {
+    return (dispatch) => {
+        UsersAPI.isAuth().then(response => {
+            if(response.resultCode === 0) {
+                let {login, email, id} = response.data;
+                dispatch(setAuthUserData(login, email, id));
+            }
+        })
     }
 }
 
