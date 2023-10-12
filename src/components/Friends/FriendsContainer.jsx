@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Friends from './Friends'
 import Preloader from '../common/preloader/preloader';
+import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
+import { compose } from 'redux';
+
 
 class FriendsAJAX extends React.Component {
-
     componentDidMount() {
         this.props.getUsers(this.props.page, this.props.pageSize);
     }
@@ -35,15 +37,16 @@ function mapStateToProps(state) {
         followingProgress: state.friendsPage.followingInProgress
     }
 }
-
-const FriendsContainer = connect(mapStateToProps, {
-    unfollow,
-    follow,
-    changePage,
-    setTotalPages,
-    setPageSize,
-    changeNumberOfLastUser,
-    toggleFollowingProgress,
-    getUsers,
-})(FriendsAJAX);
-export default FriendsContainer;
+export default compose(
+    connect(mapStateToProps, {
+        unfollow,
+        follow,
+        changePage,
+        setTotalPages,
+        setPageSize,
+        changeNumberOfLastUser,
+        toggleFollowingProgress,
+        getUsers,
+    }),
+    withAuthRedirect
+)(FriendsAJAX);
