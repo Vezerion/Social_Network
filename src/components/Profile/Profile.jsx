@@ -7,7 +7,7 @@ function Profile(props) {
     } else {
         return (
             <div className="profile">
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={props.profile} />
                 <PostsContainer />
             </div>
     

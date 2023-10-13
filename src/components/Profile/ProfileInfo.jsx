@@ -1,4 +1,5 @@
 import avatar from '../../icons/avatar-placeholder.svg';
+import ProfileStatus from './ProfileStatus';
 function ProfileInfo(props) {
 
     return (
@@ -11,6 +12,7 @@ function ProfileInfo(props) {
             <div className='profile_info'>
                 <div className='profile_name'>{props.profile.fullName}</div>
                 <div className='profile_age'>{props.profile.lookingForAJob ? 'Не ищу работу' : 'Ищу работу'}</div>
+                <ProfileStatus status={'Its testing status'}/>
                 <div className='profile_descr'>{props.profile.aboutMe}</div>
             </div>
         </div>
