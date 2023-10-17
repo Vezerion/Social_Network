@@ -1,7 +1,6 @@
 import avatar from '../../icons/avatar-placeholder.svg';
 import ProfileStatus from './ProfileStatus';
 function ProfileInfo(props) {
-
     return (
         <div className='profile_wrapper'>
             <div className='profile_photo_wrapper'>
@@ -12,7 +11,7 @@ function ProfileInfo(props) {
             <div className='profile_info'>
                 <div className='profile_name'>{props.profile.fullName}</div>
                 <div className='profile_age'>{props.profile.lookingForAJob ? 'Не ищу работу' : 'Ищу работу'}</div>
-                <ProfileStatus status={'Its testing status'}/>
+                <ProfileStatus profileId={props.profile.userId} authUserId={props.authUserId} setNewUserStatusText={props.setNewUserStatusText} status={props.status} setStatus={props.setStatus}/>
                 <div className='profile_descr'>{props.profile.aboutMe}</div>
             </div>
         </div>

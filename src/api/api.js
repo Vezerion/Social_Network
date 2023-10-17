@@ -17,11 +17,22 @@ export const UsersAPI = {
     },
     unfollowUser(id) {
         return instance.delete(`follow/${id}`).then(response => response.data);
-    },
+    }
+}
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`).then(response => response.data);
+    }
+}
+
+export const profileAPI = {
     getUserProfile(id) {
         return instance.get(`profile/${id}`).then(response => response.data);
     },
-    isAuth() {
-        return instance.get(`auth/me`).then(response => response.data);
+    getStatus(id) {
+        return instance.get(`/profile/status/${id}`).then(response => response.data);
+    },
+    updateStatus(status) {
+        return instance.put(`/profile/status`, { status: status }).then(response => response.data);
     }
 }

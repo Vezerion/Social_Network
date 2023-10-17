@@ -1,8 +1,10 @@
-import { UsersAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const SET_STATUS = 'GET-STATUS'
+const SET_NEW_STATUS = 'SET-STATUS'
 
 let initialState = {
     posts: [
@@ -14,6 +16,7 @@ let initialState = {
     ],
     newPostText: '',
     profile: null,
+    status: '',
     isFetching: false
 }
 function profileReducer(state = initialState, action) {
@@ -44,6 +47,16 @@ function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: action.flag
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case SET_NEW_STATUS:
+            return {
+                ...state,
+                status: action.newStatusText
             }
         default:
             return {
@@ -76,7 +89,18 @@ export function setFetching(flag) {
         flag: flag
     }
 }
-
+export function setUserStatusInState(status) {
+    return {
+        type: SET_STATUS,
+        status
+    }
+}
+export function setNewUserStatusText(newStatusText) {
+    return {
+        type: SET_NEW_STATUS,
+        newStatusText
+    }
+}
 // Thunk Creators
 
 export const setUserProfile = (id, userId) => {
@@ -85,11 +109,29 @@ export const setUserProfile = (id, userId) => {
             id = userId;
         }
         dispatch(setFetching(true));
-        UsersAPI.getUserProfile(id)
+        profileAPI.getUserProfile(id)
         .then(data => {
             dispatch(setUserProfileData(data));
+        });
+        profileAPI.getStatus(id).then(data => {
+            dispatch(setUserStatusInState(data));
             dispatch(setFetching(false));
         });
     }
 }
+export const setStatus = (status) => {
+    return (dispatch) => {
+        dispatch(setFetching(true));
+        profileAPI.updateStatus(status).then(data => {
+            if(!data.resultCode) {
+                console.log('Status setted');
+                setUserStatusInState(status);
+            } else {
+                console.log('Status cant be set now');
+            }
+            dispatch(setFetching(false));
+        });
+    }
+}
+
 export default profileReducer;

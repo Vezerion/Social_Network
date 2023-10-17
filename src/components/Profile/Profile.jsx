@@ -7,7 +7,7 @@ function Profile(props) {
     } else {
         return (
             <div className="profile">
-                <ProfileInfo profile={props.profile} />
+                <ProfileInfo profile={props.profile} authUserId = {props.userId} status={props.status} setNewUserStatusText={props.setNewUserStatusText} setStatus={props.setStatus}/>
                 <PostsContainer />
             </div>
     
