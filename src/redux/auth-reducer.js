@@ -15,8 +15,7 @@ function authReducer(state = initialState, action) {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true,
-                isFetching: true
+                isAuth: true
             }
         default:
             return {
