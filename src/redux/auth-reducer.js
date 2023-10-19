@@ -1,6 +1,7 @@
 import { authAPI } from "../api/api";
 const SET_AUTH_USER = 'SET-AUTH-USER';
-
+const TOGGLE_FETCHING = 'TOGGLE-FETCHING';
+const LOGOUT_USER = 'LOGOUT-USER'
 
 let initialState = {
     userId: null, 
@@ -17,6 +18,19 @@ function authReducer(state = initialState, action) {
                 ...action.data,
                 isAuth: true
             }
+        case TOGGLE_FETCHING:
+            return {
+                ...state,
+                isFetching: action.flag
+            }
+        case LOGOUT_USER:
+            return {
+                ...state,
+                userId: null, 
+                email: null,
+                login: null,
+                isAuth: false
+            }
         default:
             return {
                 ...state
@@ -31,6 +45,18 @@ export function setAuthUserData(login, email, userId) {
         data: {userId, login, email}
     }
 }
+export function toggleFetching(flag) {
+    return {
+        type: TOGGLE_FETCHING,
+        flag
+    }
+}
+
+export function logoutAC() {
+    return {
+        type: LOGOUT_USER
+    }
+}
 // ThunksCreators
 
 export const authUser = () => {
@@ -43,5 +69,41 @@ export const authUser = () => {
         })
     }
 }
+export const loginUser = (data) => {
+    return (dispatch) => {
+        dispatch(toggleFetching(true));
+        authAPI.login(data).then(data => {
+            if(data.resultCode === 0) {
+                authAPI.me().then(response => {
+                    if(response.resultCode === 0) {
+                        let {login, email, id} = response.data;
+                        dispatch(setAuthUserData(login, email, id));
+                    }
+                })
+            }
+            if(data.resultCode === 10) {
+                console.log('captcha needed');
+                console.log(data);
+            }
+            if(data.resultCode === 1) {
+                console.log('error');
+                console.log(data);
+            }
+        });
+        dispatch(toggleFetching(false));
+    }
+}
 
+export const logoutUser = () => {
+    return (dispatch) => {
+        dispatch(toggleFetching(true));
+        authAPI.logout().then(data => {
+            if(!data.resultCode) {
+                dispatch(logoutAC());
+            } else {
+                console.log('error');
+            }
+        })
+    }
+}
 export default authReducer;

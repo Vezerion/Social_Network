@@ -1,5 +1,13 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 function Login(props) {
+    const navigate = useNavigate();
+    useEffect(()=> {
+        if(props.isAuth) {
+            navigate('/profile');
+        }
+    }, [props.isAuth, navigate]);
     const {
         register,
         handleSubmit,
@@ -12,7 +20,7 @@ function Login(props) {
         mode: 'onBlur'
     });
     const emailErrors = {
-        maxLength: 'Максимальное количество символов 16',
+        maxLength: 'Максимальное количество символов 50',
         minLength: 'Минимальное колличество символов 10',
         required: 'Поле обязательно к заполнению',
         pattern: 'Введите настоящую почту'
@@ -21,29 +29,31 @@ function Login(props) {
         required: 'Поле обязательно к заполнению',
     }
     const onSubmit = (data) => {
-        alert(JSON.stringify(data));
+        props.loginUser(data);
         reset();
     }
     return (
-        <form className="login_form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="login">
+            <form className="login_form" onSubmit={handleSubmit(onSubmit)}>
             <label className="login_form_item">
-                <span>Почта</span>
-                <input type="email" {...register('email', { required: true, minLength: 10, maxLength: 16, pattern: /\S+@\S+\.\S+/ })} />
-                <div>{errors?.email && <span>{emailErrors[errors.email?.type]}</span>}</div>
+                <span className="login_form_item_header">Почта</span>
+                <input className="login_form_item_input" type="email" {...register("email", { required: true, minLength: 10, maxLength: 50, pattern: /\S+@\S+\.\S+/ })} />
+                {errors?.email && <span className="login_form_item_error">{emailErrors[errors.email?.type]}</span>}
             </label>
             <label className="login_form_item">
-                <span>Пароль</span>
-                <input type="password" {...register('password', { required: true })} />
-                <div>{errors?.password && <span>{passwordErrors[errors.password?.type]}</span>}</div>
+                <span className="login_form_item_header">Пароль</span>
+                <input className="login_form_item_input" type="password" {...register("password", { required: true })} />
+                {errors?.password && <span className="login_form_item_error">{passwordErrors[errors.password?.type]}</span>}
             </label>
             <label className="login_form_item">
-                <div>
-                    <span>remember me</span>
-                    <input type="checkbox" {...register('remember')} />
+                <div className="login_form_item_checkbox_wrapper">
+                    <span className="login_form_item_header-small">remember me</span>
+                    <input className="login_form_item_checkbox" type="checkbox" {...register("rememberMe")} />
                 </div>
             </label>
-            <button disabled={!isValid} type="submit">Submit</button>
+            <button className="login_form_btn" disabled={!isValid} type="submit">Submit</button>
         </form>
+        </div>
     )
 }
 

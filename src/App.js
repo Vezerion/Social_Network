@@ -7,7 +7,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer'
-import Login from './components/Login/Login';
+import Login from './components/Login/LoginContainer';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 function App(props) {

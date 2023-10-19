@@ -1,7 +1,47 @@
-.login_form
-    width: 300px
+.login
     display: flex
-    flex-direction: column
-    &_item
+    justify-content: center
+    align-items: center
+    &_form
+        margin-top: 20%
+        width: 300px
+        height: 270px
         display: flex
         flex-direction: column
+        justify-content: space-between
+        &_item
+            display: flex
+            flex-direction: column
+            &_header
+                font-size: 30px
+                align-self: center
+                &-small
+                    padding-right: 10px
+                    font-size: 18px
+            &_input
+                height: 30px
+                border-radius: 15px
+                border: none
+                outline: none
+                padding: 0px 15px
+                &:focus
+                    border: 1px solid #10be0a
+            &_checkbox
+                margin-top: 4px
+                cursor: pointer
+                &_wrapper
+                    display: flex
+                    justify-content: center
+            &_error
+                font-size: 16px
+                color: red
+                padding-left: 10px
+        &_btn
+            height: 35px
+            border-radius: 15px
+            border: none
+            outline: none
+            cursor: pointer
+            background-color: #4173fd
+            color: #fff
+            font-size: 20px
