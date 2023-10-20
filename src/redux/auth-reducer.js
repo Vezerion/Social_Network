@@ -1,14 +1,19 @@
 import { authAPI } from "../api/api";
+import { reset } from "./login-reducer";
 const SET_AUTH_USER = 'SET-AUTH-USER';
 const TOGGLE_FETCHING = 'TOGGLE-FETCHING';
 const LOGOUT_USER = 'LOGOUT-USER'
+const SET_CAPTCHA_FOR_LOGIN = 'SET-CAPTCHA-FOR-LOGIN'
+const CLEAR_CAPTCHA = 'CLEAR-CAPTCHA'
 
 let initialState = {
     userId: null, 
     email: null,
     login: null,
     isAuth: false,
-    isFetching: false
+    isFetching: false,
+    isCaptcha: false,
+    captchaSrc: ''
 }
 function authReducer(state = initialState, action) {
     switch (action.type) {
@@ -30,6 +35,18 @@ function authReducer(state = initialState, action) {
                 email: null,
                 login: null,
                 isAuth: false
+            }
+        case SET_CAPTCHA_FOR_LOGIN: 
+            return {
+                ...state,
+                isCaptcha: true,
+                captchaSrc: action.captchaSrc
+            }
+        case CLEAR_CAPTCHA:
+            return {
+                ...state,
+                isCaptcha: false,
+                captchaSrc: ''
             }
         default:
             return {
@@ -57,6 +74,17 @@ export function logoutAC() {
         type: LOGOUT_USER
     }
 }
+export function captchaAC(captchaSrc) {
+    return {
+        type: SET_CAPTCHA_FOR_LOGIN,
+        captchaSrc
+    }
+}
+export function clearCapthca() {
+    return {
+        type: CLEAR_CAPTCHA
+    }
+}
 // ThunksCreators
 
 export const authUser = () => {
@@ -78,12 +106,18 @@ export const loginUser = (data) => {
                     if(response.resultCode === 0) {
                         let {login, email, id} = response.data;
                         dispatch(setAuthUserData(login, email, id));
+                        dispatch(clearCapthca());
+                        dispatch(reset());
                     }
                 })
             }
             if(data.resultCode === 10) {
                 console.log('captcha needed');
-                console.log(data);
+                authAPI.captcha().then(response => {
+                    console.log(response.url);
+                    dispatch(captchaAC(response.url));
+                })
+                dispatch(clearCapthca);
             }
             if(data.resultCode === 1) {
                 console.log('error');
