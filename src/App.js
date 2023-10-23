@@ -9,9 +9,21 @@ import FriendsContainer from './components/Friends/FriendsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Login from './components/Login/LoginContainer';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { initializeApp } from './redux/app-reducer';
+import Preloader from './components/common/preloader/preloader';
 
 function App(props) {
-  return (
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    console.log('render');
+    dispatch(initializeApp());
+  }, []);
+  const isInitialized = useSelector(state => state.app.initialized);
+  // console.log(isInitialized);
+  return !isInitialized ? <Preloader/> :
     <BrowserRouter>
       <div className="wrapper">
         <HeaderContainer />
@@ -36,7 +48,6 @@ function App(props) {
         </footer>
       </div>
     </BrowserRouter>
-  );
 }
 
 export default App;

@@ -89,7 +89,7 @@ export function clearCapthca() {
 
 export const authUser = () => {
     return (dispatch) => {
-        authAPI.me().then(response => {
+        return authAPI.me().then(response => {
             if(response.resultCode === 0) {
                 let {login, email, id} = response.data;
                 dispatch(setAuthUserData(login, email, id));
