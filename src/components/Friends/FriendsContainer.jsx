@@ -5,6 +5,7 @@ import Friends from './Friends'
 import Preloader from '../common/preloader/preloader';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { compose } from 'redux';
+import { getFriends, getPage, getPageSize, getTotalPages, getTotalUsers, getIsFetching, getNumberOfLastUser, getFollowingProgress } from '../../redux/users-selectors';
 
 
 class FriendsAJAX extends React.Component {
@@ -27,14 +28,14 @@ class FriendsAJAX extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        friends: state.friendsPage.users,
-        page: state.friendsPage.page,
-        pageSize: state.friendsPage.pageSize,
-        totalPages: state.friendsPage.totalPages,
-        totalUsers: state.friendsPage.totalUsersCount,
-        isFetching: state.friendsPage.isFetching,
-        numberOfLastUser: state.friendsPage.numberOfTheLastShowenUser,
-        followingProgress: state.friendsPage.followingInProgress
+        friends: getFriends(state),
+        page: getPage(state),
+        pageSize: getPageSize(state),
+        totalPages: getTotalPages(state),
+        totalUsers: getTotalUsers(state),
+        isFetching: getIsFetching(state),
+        numberOfLastUser: getNumberOfLastUser(state),
+        followingProgress: getFollowingProgress(state)
     }
 }
 export default compose(
