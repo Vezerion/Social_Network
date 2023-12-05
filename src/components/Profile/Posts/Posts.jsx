@@ -1,4 +1,5 @@
 import Post from './Post.jsx'
+import React from 'react';
 import { useState } from 'react';
 import avatar from '../../../icons/avatar-placeholder.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -66,5 +67,4 @@ function Posts(props) {
         </div>
     )
 }
-
 export default Posts;

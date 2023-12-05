@@ -5,6 +5,7 @@ const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 const SET_STATUS = 'GET-STATUS'
 const SET_NEW_STATUS = 'SET-STATUS'
+const DELETE_POST = 'DELETE-POST'
 
 let initialState = {
     posts: [
@@ -58,6 +59,11 @@ function profileReducer(state = initialState, action) {
                 ...state,
                 status: action.newStatusText
             }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.id)
+            }
         default:
             return {
                 ...state
@@ -99,6 +105,12 @@ export function setNewUserStatusText(newStatusText) {
     return {
         type: SET_NEW_STATUS,
         newStatusText
+    }
+}
+export function deletePost(id) {
+    return {
+        type: DELETE_POST,
+        id
     }
 }
 // Thunk Creators

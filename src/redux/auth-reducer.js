@@ -88,13 +88,12 @@ export function clearCapthca() {
 // ThunksCreators
 
 export const authUser = () => {
-    return (dispatch) => {
-        return authAPI.me().then(response => {
-            if(response.resultCode === 0) {
-                let {login, email, id} = response.data;
-                dispatch(setAuthUserData(login, email, id));
-            }
-        })
+    return async (dispatch) => {
+        let response = await authAPI.me()
+        if (response.resultCode === 0) {
+            let { login, email, id } = response.data;
+            dispatch(setAuthUserData(login, email, id));
+        }
     }
 }
 export const loginUser = (data) => {

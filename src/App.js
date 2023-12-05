@@ -18,7 +18,6 @@ function App(props) {
   const dispatch = useDispatch();
   
   useEffect(()=>{
-    console.log('render');
     dispatch(initializeApp());
   }, []);
   const isInitialized = useSelector(state => state.app.initialized);

@@ -1,4 +1,5 @@
 import logo from '../../../icons/logo.png'
+import {memo} from 'react';
 // import placeholder from '../icons/placeholder.png'
 function Post(props) {
     return (
@@ -16,4 +17,4 @@ function Post(props) {
     )
 }
 
-export default Post;
+export default memo(Post);
